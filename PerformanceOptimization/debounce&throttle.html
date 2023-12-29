@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      background-color: #fff;
+      padding: 100px;
+    }
+    .refresh-box {
+      text-align: end;
+    }
+    .refresh {
+      cursor: pointer;
+      padding: 10px 20px;
+      background: rgba(11, 11, 131, 1);
+      border-radius: 8px;
+      color: #fff;
+    }
+    .refresh:hover {
+      font-size: 20px;
+      transform: scale(2);
+      transition: all 1s;
+      /* box-shadow: 0px 0px 4px 1px #fff; */
+      box-shadow: 0px 0px 0px 10px rgba(11, 11, 131, 1);
+      background-color: rgba(11, 11, 131, 1);
+
+      -moz-user-select: none; /* Firefox私有属性 */
+      -webkit-user-select: none; /* WebKit内核私有属性 */
+      -ms-user-select: none; /* IE私有属性(IE10及以后) */
+      -khtml-user-select: none; /* KHTML内核私有属性 */
+      -o-user-select: none; /* Opera私有属性 */
+      user-select: none; /* CSS3属性 */
+    }
+  </style>
+  <body>
+    <div class="refresh-box">
+      <span id="refresh" class="refresh">刷新</span>
+    </div>
+    <script>
+      // 随机色
+      function randomColor() {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        return "rgba(" + r + "," + g + "," + b + ",0.8)";
+      }
+
+      // 定时器实现防抖
+      function debounceBySetTimeout(func, delay = 2000) {
+        let timer = null;
+        return function () {
+          const context = this;
+          const args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            func.apply(context, args);
+          }, delay);
+        };
+      }
+
+      // 定时器实现节流
+      function throttleBySetTimeout(func, delay = 2000) {
+        let timer = null;
+        return function () {
+          const context = this;
+          const args = arguments;
+          if (timer) {
+            return;
+          }
+          timer = setTimeout(() => {
+            func.apply(context, args);
+            timer = null;
+          }, delay);
+        };
+      }
+
+      // 时间戳实现节流
+      function throttleByDateTime(func, delay = 2000) {
+        let timer = 0;
+        return function () {
+          const context = this;
+          const args = arguments;
+          const currTime = Date.now();
+          if (currTime - timer > delay) {
+            func.apply(context, arguments);
+            timer = currTime;
+          }
+        };
+      }
+
+      // 文档视图（窗口）变化回调
+      function callback() {
+        window.document.body.style.background = randomColor();
+      }
+
+      addEventListener("resize", throttleBySetTimeout(callback));
+      document
+        .getElementById("refresh")
+        .addEventListener("click", debounceBySetTimeout(callback));
+    </script>
+  </body>
+</html>
