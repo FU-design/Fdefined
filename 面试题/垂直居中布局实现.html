@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .pBox {
+        width: 500px;
+        height: 500px;
+        background-color: bisque;
+
+        /* 1. flex */
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+
+        /* 4. grid */
+        /* display: grid;
+        justify-content: center;
+        align-items: center; */
+    }
+
+    .cBox2 {
+        /* 2. 父相对 + 子绝对 + margin: auto （父元素设置高度，子元素设置宽高）*/
+        /* position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto; */
+    }
+
+    .cBox2 {
+        /* 3. 父相对 + 子绝对 + translate(-50%, -50%)  */
+        /* position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); */
+    }
+
+    .cBox2 {
+        /* 5. 父网格 + grid 子项属性居中  */
+        /* align-self: center;
+        justify-self: center; */
+    }
+
+    .cBox2 {
+        /* 6. 父网格 + margin: auto  */
+        /* margin: auto; */
+
+    }
+
+    .cBox2 {
+        /* width: 80px; */
+        /* height: 80px; */
+        background-color: chocolate;
+
+    }
+</style>
+
+<body>
+    <div class="pBox">
+        <!-- <div class="cBox1">我是cBox1</div> -->
+        <span class="cBox2">我是cBox2</span>
+    </div>
+</body>
+
+</html>
